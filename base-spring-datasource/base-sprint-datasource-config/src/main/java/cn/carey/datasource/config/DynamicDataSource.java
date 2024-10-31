@@ -6,6 +6,13 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
 
+/**
+ * 动态数据源
+ * AbstractRoutingDataSource是Spring提供的一个抽象类，继承自AbstractDataSource，实现了接口DataSource。
+ * AbstractRoutingDataSource的作用是根据某种策略选择数据源，这个策略是由用户自己来实现的。
+ * 通过继承AbstractRoutingDataSource，重写方法determineCurrentLookupKey()，可以实现自己的数据源选择策略。
+ * 通过这种方式，可以实现动态数据源的切换。
+ */
 public class DynamicDataSource extends AbstractRoutingDataSource {
 
     private static final List<Object> READ_DATASOURCE_KEYS = new ArrayList<>();

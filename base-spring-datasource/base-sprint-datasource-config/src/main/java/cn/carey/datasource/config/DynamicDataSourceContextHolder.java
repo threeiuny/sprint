@@ -1,5 +1,8 @@
 package cn.carey.datasource.config;
 
+/**
+ * 动态数据源上下文
+ */
 public class DynamicDataSourceContextHolder {
     // 使用 ThreadLocal 存储当前线程的数据源类型
     private static final ThreadLocal<String> CONTEXT_HOLDER = new ThreadLocal<>();

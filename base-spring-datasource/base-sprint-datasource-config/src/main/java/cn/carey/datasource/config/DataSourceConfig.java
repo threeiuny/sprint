@@ -18,12 +18,13 @@ public class DataSourceConfig {
     // @Bean
     // @ConfigurationProperties(prefix = "spring.datasource.master")
     // public DataSourceProperties masterProperty() {
-    //     return new DataSourceProperties();
+    // return new DataSourceProperties();
     // }
 
     // @Bean(name = "masterDataSource")
-    // public DataSource masterDataSource(@Qualifier("masterProperty") DataSourceProperties masterProperty) {
-    //     return masterProperty.initializeDataSourceBuilder().build();
+    // public DataSource masterDataSource(@Qualifier("masterProperty")
+    // DataSourceProperties masterProperty) {
+    // return masterProperty.initializeDataSourceBuilder().build();
     // }
 
     // 使用DataSourceBuilder创建数据源--------------------
