@@ -13,55 +13,56 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class DataSourceConfig {
-    // ...已有代码...
 
-    @Bean(name = "writeDataSource")
-    @ConfigurationProperties(prefix = "spring.datasource.write")
-    public DataSource writeDataSource() {
+    // // 使用DataSourceProperties创建数据源--------------------
+    // @Bean
+    // @ConfigurationProperties(prefix = "spring.datasource.master")
+    // public DataSourceProperties masterProperty() {
+    //     return new DataSourceProperties();
+    // }
+
+    // @Bean(name = "masterDataSource")
+    // public DataSource masterDataSource(@Qualifier("masterProperty") DataSourceProperties masterProperty) {
+    //     return masterProperty.initializeDataSourceBuilder().build();
+    // }
+
+    // 使用DataSourceBuilder创建数据源--------------------
+    @Bean(name = "masterDataSource")
+    @ConfigurationProperties(prefix = "spring.datasource.master")
+    public DataSource masterDataSource() {
         // 配置写数据源
         return DataSourceBuilder.create().build();
     }
 
-    @Bean(name = "readDataSource1")
-    @ConfigurationProperties(prefix = "spring.datasource.read1")
-    public DataSource readDataSource1() {
+    @Bean(name = "slave1DataSource")
+    @ConfigurationProperties(prefix = "spring.datasource.slave.slave1")
+    public DataSource slave1DataSource() {
         // 配置读数据源1
         return DataSourceBuilder.create().build();
     }
 
-    @Bean(name = "readDataSource2")
-    @ConfigurationProperties(prefix = "spring.datasource.read2")
-    public DataSource readDataSource2() {
+    @Bean(name = "slave2DataSource")
+    @ConfigurationProperties(prefix = "spring.datasource.slave.slave2")
+    public DataSource slave2DataSource() {
         // 配置读数据源2
-        return DataSourceBuilder.create().build();
-    }
-
-    @Bean(name = "readDataSource3")
-    @ConfigurationProperties(prefix = "spring.datasource.read3")
-    public DataSource readDataSource3() {
-        // 配置读数据源3
         return DataSourceBuilder.create().build();
     }
 
     @Bean
     public DynamicDataSource dataSource(
-            @Qualifier("writeDataSource") DataSource writeDataSource,
-            @Qualifier("readDataSource1") DataSource readDataSource1,
-            @Qualifier("readDataSource2") DataSource readDataSource2,
-            @Qualifier("readDataSource3") DataSource readDataSource3
-    ) {
-        // 配置动态数据源，将读写数据源设置到目标数据源中
+            @Qualifier("masterDataSource") DataSource masterDataSource,
+            @Qualifier("slave1DataSource") DataSource slave1DataSource,
+            @Qualifier("slave2DataSource") DataSource slave2DataSource) {
+        // 配置动态数据源，将主从数据源设置到目标数据源中
         DynamicDataSource dynamicDataSource = new DynamicDataSource();
         Map<Object, Object> targetDataSources = new HashMap<>();
-        targetDataSources.put("write", writeDataSource);
-        targetDataSources.put("read1", readDataSource1);
-        targetDataSources.put("read2", readDataSource2);
-        targetDataSources.put("read3", readDataSource3);
+        targetDataSources.put("master", masterDataSource);
+        targetDataSources.put("slave1", slave1DataSource);
+        targetDataSources.put("slave2", slave2DataSource);
         dynamicDataSource.setTargetDataSources(targetDataSources);
-        // 设置默认数据源为写数据源
-        dynamicDataSource.setDefaultTargetDataSource(writeDataSource);
+        // 设置默认数据源为主数据源
+        dynamicDataSource.setDefaultTargetDataSource(masterDataSource);
         return dynamicDataSource;
     }
 
-    // ...配置 SqlSessionFactory、事务管理器等...
 }

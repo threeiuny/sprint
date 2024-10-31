@@ -1,0 +1,20 @@
+spring:
+  datasource:
+    master:
+      url: jdbc:mysql://localhost:3306/write_db
+      username: write_user
+      password: write_password
+      driver-class-name: com.mysql.cj.jdbc.Driver
+    slave:
+      slave1:
+        url: jdbc:mysql://localhost:3306/read_db1
+        username: read_user1
+        password: read_password1
+        driver-class-name: com.mysql.cj.jdbc.Driver
+      slave2:
+        url: jdbc:mysql://localhost:3306/read_db2
+        username: read_user2
+        password: read_password2
+        driver-class-name: com.mysql.cj.jdbc.Driver
+
+# ...其他配置...

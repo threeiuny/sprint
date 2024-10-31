@@ -9,15 +9,15 @@ import org.springframework.stereotype.Component;
 @Component
 public class DataSourceAspect {
 
-    @Pointcut("@annotation(cn.carey.datasource.annotation.ReadOnly)")
+    @Pointcut("@annotation(cn.carey.datasource.annotation.SlaveDataSource)")
     public void readPointcut() {
-        // 切入点，匹配所有使用 @ReadOnly 注解的方法
+        // 切入点，匹配所有使用 @SlaveDataSource 注解的方法
     }
 
     @Before("readPointcut()")
     public void beforeRead(JoinPoint joinPoint) {
         // 方法执行前，切换到读数据源
-        DynamicDataSourceContextHolder.setDataSourceKey("read");
+        DynamicDataSourceContextHolder.setDataSourceKey("slave");
     }
 
     @After("readPointcut()")

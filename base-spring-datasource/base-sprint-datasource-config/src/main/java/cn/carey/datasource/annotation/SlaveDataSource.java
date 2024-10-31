@@ -7,6 +7,6 @@ import java.lang.annotation.RetentionPolicy;
 
 @Target({ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)
-public @interface ReadOnly {
+public @interface SlaveDataSource {
     // 标识只读方法的注解
 }
