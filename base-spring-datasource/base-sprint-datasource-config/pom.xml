@@ -28,5 +28,11 @@
             <artifactId>HikariCP</artifactId>
             <version>${HikariCP.version}</version>
         </dependency>
+        <!-- aspect组件 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-aop</artifactId>
+            <version>${spring-boot.version}</version>
+        </dependency>
     </dependencies>
 </project>
