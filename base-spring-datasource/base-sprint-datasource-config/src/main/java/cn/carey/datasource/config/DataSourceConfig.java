@@ -49,7 +49,7 @@ public class DataSourceConfig {
         return DataSourceBuilder.create().build();
     }
 
-    @Bean
+    @Bean(name = "dynamicDataSource")
     public DynamicDataSource dataSource(
             @Qualifier("masterDataSource") DataSource masterDataSource,
             @Qualifier("slave1DataSource") DataSource slave1DataSource,
