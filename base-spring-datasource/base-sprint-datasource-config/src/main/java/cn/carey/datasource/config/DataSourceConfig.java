@@ -10,8 +10,10 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 
 @Configuration
+@ConditionalOnProperty(name = {"spring.datasource.master.url", "spring.datasource.slave.slave1.url", "spring.datasource.slave.slave2.url"})
 public class DataSourceConfig {
 
     // // 使用DataSourceProperties创建数据源--------------------

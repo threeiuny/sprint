@@ -3,13 +3,16 @@ package cn.carey.datasource.aspect;
 import cn.carey.datasource.config.DynamicDataSourceContextHolder;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.*;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.stereotype.Component;
+import javax.sql.DataSource;
 
 /**
  * 数据源切面处理类
  */
 @Aspect
 @Component
+@ConditionalOnBean(DataSource.class)
 public class DataSourceAspect {
 
     @Pointcut("@annotation(cn.carey.datasource.annotation.SlaveDataSource)")
@@ -19,7 +22,7 @@ public class DataSourceAspect {
 
     @Before("slavePointcut()")
     public void beforeRead(JoinPoint joinPoint) {
-        // 方法执行前，切换到读数据源
+        // 方法执行前，切换到读从据源
         DynamicDataSourceContextHolder.setDataSourceKey("slave");
     }
 
