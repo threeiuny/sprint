@@ -1,4 +1,4 @@
-package cn.carey.datasource.config;
+package cn.carey.datasource.template;
 
 import javax.sql.DataSource;
 
