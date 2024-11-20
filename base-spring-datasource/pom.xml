@@ -22,6 +22,7 @@
         <mybatis-spring.version>2.2.0</mybatis-spring.version>
         <spring-boot.version>3.4.0-RC1</spring-boot.version>
         <HikariCP.version>5.1.0</HikariCP.version>
+        <lombok.version>1.18.36</lombok.version>
     </properties>
 
     <dependencyManagement>
@@ -51,6 +52,12 @@
                 <artifactId>spring-boot-starter-aop</artifactId>
                 <version>${spring-boot.version}</version>
             </dependency>
+            <dependency>
+				<groupId>org.projectlombok</groupId>
+				<artifactId>lombok</artifactId>
+				<version>${lombok.version}</version>
+				<scope>provided</scope>
+			</dependency>
         </dependencies>
     </dependencyManagement>
 
