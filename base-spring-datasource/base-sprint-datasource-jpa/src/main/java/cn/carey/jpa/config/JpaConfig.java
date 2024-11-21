@@ -1,6 +1,8 @@
 package cn.carey.jpa.config;
 
 import cn.carey.jpa.config.properties.JpaProperties;
+
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,6 +14,7 @@ import javax.sql.DataSource;
 
 @Configuration
 @EnableConfigurationProperties(JpaProperties.class)
+@ConditionalOnBean(DataSource.class)
 public class JpaConfig {
     
     /**
