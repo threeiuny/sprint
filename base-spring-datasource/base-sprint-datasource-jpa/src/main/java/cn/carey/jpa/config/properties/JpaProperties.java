@@ -1,6 +1,7 @@
 package cn.carey.jpa.config.properties;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.orm.jpa.vendor.Database;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -16,6 +17,11 @@ public class JpaProperties {
      * 数据库平台
      */
     private String databasePlatform;
+
+    /**
+     * 数据库类型
+     */
+    private Database database;
 
     /**
      * 是否显示SQL

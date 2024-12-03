@@ -28,9 +28,13 @@ public class JpaConfig {
     @Bean
     public JpaVendorAdapter jpaVendorAdapter(JpaProperties properties) {
         HibernateJpaVendorAdapter adapter = new HibernateJpaVendorAdapter();
+        // 设置是否显示SQL
         adapter.setShowSql(properties.isShowSql());
+        // 设置是否生成DDL
         adapter.setGenerateDdl(properties.isGenerateDdl());
+        // 设置数据库方言
         adapter.setDatabasePlatform(properties.getDatabasePlatform());
+        adapter.setDatabase(properties.getDatabase());
         return adapter;
     }
 
@@ -49,9 +53,13 @@ public class JpaConfig {
             JpaVendorAdapter jpaVendorAdapter,
             JpaProperties properties) {
         LocalContainerEntityManagerFactoryBean factory = new LocalContainerEntityManagerFactoryBean();
+        // 设置数据源
         factory.setDataSource(dataSource);
+        // 设置JPA厂商适配器
         factory.setJpaVendorAdapter(jpaVendorAdapter);
+        // 设置实体类扫描路径
         factory.setPackagesToScan(properties.getPackagesToScan());
+        // 设置Hibernate特定配置
         factory.setJpaPropertyMap(properties.getProperties());
         // 完成属性设置后进行初始化
         factory.afterPropertiesSet();

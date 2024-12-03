@@ -10,6 +10,7 @@ import jakarta.persistence.EntityManagerFactory;
 /**
  * JPA Repositories配置类
  * 用于启用JPA Repositories功能并指定扫描路径
+ * basePackages: 指定Repository扫描路径
  */
 @Configuration
 @ConditionalOnBean({
